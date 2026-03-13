@@ -20,13 +20,13 @@ private:
 
 public:
     void setdata(int id,
-                 string name,
-                 string type,
-                 string rating,
-                 string location,
-                 int year,
-                 int staff,
-                 int room)
+        string name,
+        string type,
+        string rating,
+        string location,
+        int year,
+        int staff,
+        int room)
     {
         hotel_id = id;
         hotel_name = name;
@@ -40,8 +40,7 @@ public:
 
     void display()
     {
-        cout << "Details of hotels :-\n"
-             << endl;
+        cout << "Details of hotels :-\n" << endl;
 
         cout << "\nHotel Id = " << hotel_id << endl;
         cout << "\nHotel Name = " << hotel_name << endl;
@@ -62,7 +61,7 @@ public:
     }
 };
 
-string hotel ::country = "India";
+string hotel :: country = "India";
 
 int main()
 {
@@ -78,8 +77,7 @@ int main()
 
     for (int i = 0; i < n; i++)
     {
-        cout << "\nEnter Details Of Hotel\n"
-             << i + 1 << endl;
+        cout << "\nEnter Details Of Hotel\n" << i + 1 << endl;
         cout << "\nEnter Hotel ID=";
         cin >> id;
         cout << "\nEnter Hotel Name=";
@@ -101,7 +99,7 @@ int main()
     }
     for (int i = 0; i < n; i++)
     {
-        cout << "\nDetails Of Hotel" << i + 1 << endl;
+        cout << "\nDetails Of Hotel"<< i + 1 << endl;        
         h[i].display();
     }
     return 0;
