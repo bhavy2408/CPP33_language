@@ -118,12 +118,12 @@ int train::traincount=0;
 
 class RailwaySystem{
     private:
-    Train trains[100];
+    train trains[100];
     int totalTrains=0;
 
     public:
     void addtrain(){
-        if(train < 100)
+        if(trains < 100)
         {
             train[totalTrains].inputTrainDetails();
             totalTrains++;
@@ -138,10 +138,25 @@ class RailwaySystem{
         }else{
             for(int i=0 ; i<totalTrains ; i++)
             {
-                train[totalTrains].displayTrainDetails();
+                train[i].displayTrainDetails();
             }
         }
-
-
     }
+
+   void searchTrainByNumber(int number){
+
+    for(int i=0 ; i< totalTrains ; i++)
+    {
+        if(train[i].gettrainNumber()==number)
+        {
+            return train[i];
+        }else{
+            cout << "Train is not found" << endl;
+        }
+    }
+   }
+   
 };
+int main(){
+
+}
