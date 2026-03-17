@@ -1,162 +1,191 @@
-//Railway Reserve 
-#include<iostream>
+// Railway Reserve
+#include <iostream>
+#include <cstring>
 
 using namespace std;
 
-class train{
-    private:
-        int trainNumber;
-        char trainName[50];
-        char source[50];
-        char destination[50];
-        char trainTime[10];
+class train
+{
+private:
+    int trainNumber;
+    char *trainName;
+    char *source;
+    char *destination;
+    char *trainTime;
 
-        static int traincount;
+    static int traincount;
 
-    public:
-
-    //default constructor:-
+public:
+    // default constructor:-
     train()
     {
-        trainNumber=0;
-        trainName=new char [1];
-        trainName[0]='/0';
-        source=new char [1];
-        source[0]='/0';
-        destination=new char [1];
-        destination[0]='/0';
-        trainTime=new char [1];
-        trainTime[0]='/0';
-        traincount++; 
+        trainNumber = 0;
+        trainName = new char[1];
+        trainName[0] = '\0';
+        source = new char[1];
+        source[0] = '\0';
+        destination = new char[1];
+        destination[0] = '\0';
+        trainTime = new char[1];
+        trainTime[0] = '\0';
+        traincount++;
     }
 
-    //parameterized constructor:-
-    train(int num , const char* tname , const char* s , const char* d, const char* ttime ){
-        trainNumber=num;
+    // parameterized constructor:-
+    train(int num, const char *tname, const char *s, const char *d, const char *ttime)
+    {
+        trainNumber = num;
         trainName = new char[strlen(tname) + 1];
         strcpy(trainName, tname);
-        source=new char[strlen(s)+1];
-        strcpy(source,s);
-        destination=new char[strlen(d)+1];
-        strcpy(destination,d);
-        trainTime=new char[strlen(ttime)+1];
-        strcpy(trainTime,ttime);
+
+        source = new char[strlen(s) + 1];
+        strcpy(source, s);
+
+        destination = new char[strlen(d) + 1];
+        strcpy(destination, d);
+
+        trainTime = new char[strlen(ttime) + 1];
+        strcpy(trainTime, ttime);
 
         traincount++;
+    }
+    // destractor
+    ~train()
+    {
+        traincount--;
+    }
+    // setter method
+    void settrainNumber(int num)
+    {
+        trainNumber = num;
+    }
+    void settrainName(const char *tname)
+    {
+        trainName = new char[strlen(tname) + 1];
+        strcpy(trainName, tname);
+    }
+    void setsource(const char *s)
+    {
+        source = new char[strlen(s) + 1];
+        strcpy(source, s);
+    }
+    void setdestination(const char *d)
+    {
+        destination = new char[strlen(d) + 1];
+        strcpy(destination, d);
+    }
+    void settrainTime(const char *ttime)
+    {
+        trainTime = new char[strlen(ttime) + 1];
+        strcpy(trainTime, ttime);
+    }
 
-        ~train(){
-            traincount--;
-        }
-        //setter method
-        void settrainNumber(int num){
-            trainNumber=num;
-        }
-        void set trainName(const char* tname){
-            trainName=tname;
-        }
-        void setsource(const char* s){
-            source=s;
-        }
-        void setdestination(const char* d){
-            destination=d;
-        }
-        void settrainTime(const char* ttime){
-            trainTime=ttime;
-        }
-        
-        //getter method
-        int gettrainNumber() const{
-            return trainNumber;
-        }
-        const char* gettrainName() const{
-            return trainName;
-        }
-        const char* getsource() const{
-            return source;
-        }
-        const char* getdestination() const{
-            return destination;
-        }
-        const char* gettrainTime() const{
-            return trainTime;
-        }
+    // getter method
+    int gettrainNumber() const
+    {
+        return trainNumber;
+    }
+    const char *gettrainName() const
+    {
+        return trainName;
+    }
+    const char *getsource() const
+    {
+        return source;
+    }
+    const char *getdestination() const
+    {
+        return destination;
+    }
+    const char *gettrainTime() const
+    {
+        return trainTime;
+    }
 
-        // inputing the deatils 
-        void inputTrainDetails(){
-            cout << "Enter The Train Number : ";
-            cin >> trainNumber;
+    // inputing the deatils
+    void inputTrainDetails()
+    {
+        cout << "Enter The Train Number : ";
+        cin >> trainNumber;
 
-            cout << "Enter The Train Name : ";
-            cin >> trainName;
-            
-            cout << "Enter The Train Source : ";
-            cin >> source;
+        cout << "Enter The Train Name : ";
+        cin >> trainName;
 
-            cout << "Enter The Trai Destination : ";
-            cin >> destination;
+        cout << "Enter The Train Source : ";
+        cin >> source;
 
-            cout << "Enter The Train time: ";
-            cin >> trainTime;
-        }
-        // display train details
-        void displayTrainDetails(){
-            cout << "Train Number : " << trainNumber << endl;
-            cout << "Train Name : " << trainName << endl;
-            cout << "Train Source : " << source << endl;
-            cout << "Train Destination : " << destination << endl;
-            cout << "Train Timeing : " << trainTime << endl;
-        }
+        cout << "Enter The Trai Destination : ";
+        cin >> destination;
 
-        //static
-        static int getTrainCount(){
-            return traincount;
-        }
-
+        cout << "Enter The Train time: ";
+        cin >> trainTime;
+    }
+    // display train details
+    void displayTrainDetails()
+    {
+        cout << "Train Number : " << trainNumber << endl;
+        cout << "Train Name : " << trainName << endl;
+        cout << "Train Source : " << source << endl;
+        cout << "Train Destination : " << destination << endl;
+        cout << "Train Timeing : " << trainTime << endl;
+    }
+    // static
+    static int getTrainCount()
+    {
+        return traincount;
     }
 };
-int train::traincount=0;
+int train::traincount = 0;
 
-class RailwaySystem{
-    private:
+class RailwaySystem
+{
+private:
     train trains[100];
-    int totalTrains=0;
+    int totalTrains = 0;
 
-    public:
-    void addtrain(){
-        if(trains < 100)
-        {
-            train[totalTrains].inputTrainDetails();
+public:
+    void addtrain()
+    {
+        if (totalTrains < 100){
+            trains[totalTrains].inputTrainDetails();
             totalTrains++;
-        }else{
-            cout << "Storage is full !"; 
+        }
+        else{
+            cout << "Storage is full !";
         }
     }
 
-    void displayAllTrains(){
-        if(totalTrains==0){
+    void displayAllTrains()
+    {
+        if (totalTrains == 0)
+        {
             cout << "trains is not found ";
-        }else{
-            for(int i=0 ; i<totalTrains ; i++)
+        }
+        else
+        {
+            for (int i = 0; i < totalTrains; i++)
             {
-                train[i].displayTrainDetails();
+               trains[i].displayTrainDetails();
             }
         }
     }
 
-   void searchTrainByNumber(int number){
-
-    for(int i=0 ; i< totalTrains ; i++)
+    void searchTrainByNumber(int number)
     {
-        if(train[i].gettrainNumber()==number)
+
+        for (int i = 0; i < totalTrains; i++)
         {
-            return train[i];
-        }else{
-            cout << "Train is not found" << endl;
+            if (trains[i].gettrainNumber() == number)
+            {
+                return;
+            }
+            else
+            {
+                cout << "Train is not found" << endl;
+            }
         }
     }
-   }
-   
 };
-int main(){
+int main()
 
 }
