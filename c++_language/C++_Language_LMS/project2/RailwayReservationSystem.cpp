@@ -51,19 +51,24 @@ public:
     }
     // destractor
     ~train()
-    {
-        traincount--;
-    }
+{
+    delete[] trainName;
+    delete[] source;
+    delete[] destination;
+    delete[] trainTime;
+    traincount--;
+}
     // setter method
     void settrainNumber(int num)
     {
         trainNumber = num;
     }
-    void settrainName(const char *tname)
-    {
-        trainName = new char[strlen(tname) + 1];
-        strcpy(trainName, tname);
-    }
+   void settrainName(const char *tname)
+{
+    delete[] trainName;
+    trainName = new char[strlen(tname) + 1];
+    strcpy(trainName, tname);
+}
     void setsource(const char *s)
     {
         source = new char[strlen(s) + 1];
@@ -103,23 +108,30 @@ public:
     }
 
     // inputing the deatils
-    void inputTrainDetails()
-    {
-        cout << "Enter The Train Number : ";
-        cin >> trainNumber;
+   void inputTrainDetails()
+{
+    char tname[50], s[50], d[50], ttime[20];
 
-        cout << "Enter The Train Name : ";
-        cin >> trainName;
+    cout << "Enter Train Number: ";
+    cin >> trainNumber;
 
-        cout << "Enter The Train Source : ";
-        cin >> source;
+    cout << "Enter Train Name: ";
+    cin >> tname;
 
-        cout << "Enter The Trai Destination : ";
-        cin >> destination;
+    cout << "Enter Source: ";
+    cin >> s;
 
-        cout << "Enter The Train time: ";
-        cin >> trainTime;
-    }
+    cout << "Enter Destination: ";
+    cin >> d;
+
+    cout << "Enter Time: ";
+    cin >> ttime;
+
+    settrainName(tname);
+    setsource(s);
+    setdestination(d);
+    settrainTime(ttime);
+}
     // display train details
     void displayTrainDetails()
     {
@@ -170,22 +182,71 @@ public:
         }
     }
 
-    void searchTrainByNumber(int number)
+void searchTrainByNumber(int number)
+  {
+
+    bool found = false;
+
+    for (int i = 0; i < totalTrains; i++)
     {
-
-        for (int i = 0; i < totalTrains; i++)
-        {
-            if (trains[i].gettrainNumber() == number)
-            {
-                return;
-            }
-            else
-            {
-                cout << "Train is not found" << endl;
-            }
-        }
+      if (trains[i].gettrainNumber() == number)
+      {
+        trains[i].displayTrainDetails();
+        found = true;
+        break;
+      }
     }
+    if(!found)
+    {
+      cout << "Train is not found" << endl;
+    }
+  }
 };
-int main()
 
+int main(){
+    RailwaySystem system;
+    int choice;
+
+    cout <<"\n+++++++++++++Railway Reservation System Menu++++++++++++++\n";
+    cout <<"\n++++             1. Add New Train Record              ++++\n";
+    cout <<"\n++++             2. Display All Train Records         ++++\n";
+    cout <<"\n++++             3. Search Train by Number            ++++\n";
+    cout <<"\n++++             4. Exit                              ++++\n";
+    cout <<"\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n";
+
+    
+
+    do{
+
+        cout << "\nEnter Your Choice : ";
+        cin >> choice;
+
+    
+        switch (choice){
+            case 1:
+                cout <<  "\n1. Add New Train Record\n" << endl;
+                system.addtrain();
+                break;
+
+            case 2:
+                cout <<"\n2. Display All Train Records" << endl;
+                system.displayAllTrains();
+                break;
+
+            case 3:
+                cout << "\n3. Search Train by Number" << endl;
+                int number;
+                cout << "Enter train number to search: ";
+                cin >> number;
+                system.searchTrainByNumber(number);
+                break;
+
+            case 4:
+                cout << "Exit....." << endl;
+        }
+    }while (choice != 4);
+            
+     
+
+   return 0;
 }
