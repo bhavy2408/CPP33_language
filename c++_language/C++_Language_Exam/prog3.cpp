@@ -6,114 +6,84 @@ Demonstrate abstraction by calling the area calculation methods for both `Circle
 */
 
 #include<iostream>
-
 using namespace std;
 
-class Shape{
-    private:
+class Shape {
+private:
     string color;
-    int area;
+    double area;
 
-    public:
-    Shape(){
-        color ="";
-        area=0;
-    }
-    Shape(float c , float a){
-        color=c;
-        area=a;
+public:
+    void setColor(string c) {
+        color = c;
     }
 
-    void setshape(){
-
-        cout << "\nEnter Color : ";
-        cin >> color;
-
-        cout << "\nEnter Area : ";
-        cin >> area;
+    string getColor() {
+        return color;
     }
-    
 
-    void getshape(){
-        cout << "Color : " << color << endl;
-        cout << "Area of (Circle and Rectangle): " << area << endl;
-
-        // int area = length * width;
-        // cout << "Area of Rectangle : "<< area << endl;
+    void setArea(double a) {
+        area = a;
     }
+
+    double getArea() {
+        return area;
+    }
+
+   
+    virtual void calculateArea() = 0;
 };
 
-class Circle : public Shape{
-    private:
-    double pi=3.14;
+class Circle : public Shape {
+private:
     double radius;
 
-    public:
-    Circle(){
-        radius=0.00;
-    }
-    Circle(double p , double r){
-        pi = p;
+public:
+    void setCircle(double r) {
         radius = r;
     }
 
-    void set(){
-        cout << "Enter Radius : ";
-        cin >> radius; 
-    }
-    void get(){
-
-        cout << "\nArea Of Circle\n" << endl;
-  
-        cout << "Area of Circle :-";
-        cout << "Radius :  " << radius << endl;
-
-        int area = pi * radius * radius;
-
-        cout << "Area of Circle : " << area << endl;
-
+    void calculateArea() {
+        double a = 3.14 * radius * radius;
+        setArea(a);
     }
 };
 
-class Rectangle : public Shape{
-    private:
-   double length;
-    double width;
+class Rectangle : public Shape {
+private:
+    double length, width;
 
-    public:
-     Rectangle(){
-        length=0.00;
-        width=0.00;
-    }
-    Rectangle(float l , float w){
-        length=l;
-        width=w;
-    }
-    void set(){
-
-        cout << "\nEnter Length : ";
-        cin >> length;
-
-        cout << "\nEnter Width : ";
-        cin >> width;
+public:
+    void setRectangle(double l, double w) {
+        length = l;
+        width = w;
     }
 
-    void get(){
-        cout << "\nArea Of Rectangle\n" << endl;
-        get();
-        cout << "Length : " << length << endl;
-        cout << "Width : " << width << endl;
-
-        int area = length * width;
-        cout << "Area of Rectangle : "<< area << endl;
+    void calculateArea() {
+        double a = length * width;
+        setArea(a);
     }
 };
 
-int main(){
-    Rectangle r;
+int main() {
     Circle c;
-    c.set();
-    c.get();
+    Rectangle r;
+
+    
+    cout << "\nCircle :-" << endl;
+    c.setColor("Red");
+    c.setCircle(5);
+    c.calculateArea();
+    cout << "Color: " << c.getColor() << endl;
+    cout << "Area: " << c.getArea() << endl;
+
+    
+    cout << "\nRectangle :-" << endl;
+    r.setColor("Blue");
+    r.setRectangle(4, 5);
+    r.calculateArea();
+    cout << "Color: " << r.getColor() << endl;
+    cout << "Area: " << r.getArea() << endl;
+
     return 0;
 }
-
