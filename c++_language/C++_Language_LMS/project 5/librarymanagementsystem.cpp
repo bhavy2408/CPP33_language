@@ -265,7 +265,7 @@ int main()
             {
                 for (int i = 0; i < count; i++)
                 {
-                    libraryItems[i]->displayDetails(); // polymorphism
+                    libraryItems[i]->displayDetails();
                 }
             }
             break;
